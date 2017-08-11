@@ -42,7 +42,7 @@ navigator.mediaDevices.enumerateDevices()
 }
 
 // Trigger photo take
-
+var j=0;
 function snap(){
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
@@ -55,10 +55,48 @@ function snap(){
             rgb+=data[i]+data[i+1]+data[i+2];
             
         }
-        updateChart(Math.round(rgb/1000))
-        console.log(Math.round(rgb/1000))
+        updateChart(Math.round(rgb/100)) //x 
+        //console.log(Math.round(rgb/1000)-last_beat) //dy/dx
         last_beat=Math.round(rgb/1000)
         
+    //Do every 40 times    
+     if(j%40==0){
+        var beat={}
+        beat["9"]=findBeat(9)
+        beat["10"]=findBeat(10)
+        beat["11"]=findBeat(11)
+        beat["12"]=findBeat(12)
+        beat["13"]=findBeat(13)
+        var beatint=Object.keys(beat).reduce(function(a, b){ return beat[a] > beat[b] ? a : b })
+        console.log("beat: "+Math.round(60*1000/(beatint*90))+"bpm")
+     }
+     j+=1;
+     
+     
+     
+}
+
+function findBeat(input){
+         //Check if its either 9,10,11,12,13
+         
+         var ref_data=data_arr
+         var slice=ref_data.slice(0,input)
+   
+         //Push 5 times
+         var new_slice;
+           new_slice=slice.concat(slice,slice,slice,slice,slice)
+
+
+         //Get back the first 40 elements
+         var final_slice=new_slice.slice(0,40)
+
+         var compare_arr=[]
+         for(var l = 0; l < ref_data.length; l += 1) {
+           //Find variance
+           compare_arr[l]=Math.abs(final_slice[l]-ref_data[l]);
+         }
+         var sum = compare_arr.reduce(function(a, b) { return a + b; }, 0);
+         return sum;
 }
 
 var last_beat=0;
@@ -76,6 +114,7 @@ clearInterval(myInt);
 var myvar=1;  
 var label_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var data_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var dydx_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var myChart,chartctx
 
 function doChart(){
@@ -135,15 +174,19 @@ function updateChart(input){
 
           try{
           myChart.data.datasets[0].data[i] = data_arr[i+1];
+          dydx_arr[i]=dydx_arr[i+1];
           myChart.data.labels[i] = "";
           if(i==39){
               myChart.data.datasets[0].data[i] = input;
+              //dydx_arr[i]=input-last_beat;
           }
           }catch(err){
               myChart.data.datasets[0].data[i] = input;
+              //dydx_arr[i]=input-last_beat;
           }
         }
-          
+          //console.log(data_arr)
+          //console.log(dydx_arr)
           myChart.update();      
 }
 
