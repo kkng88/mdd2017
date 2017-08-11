@@ -55,9 +55,10 @@ function snap(){
             rgb+=data[i]+data[i+1]+data[i+2];
             
         }
-        updateChart(Math.round(rgb/1000)-last_beat)
+        updateChart(Math.round(rgb/1000))
+        console.log(Math.round(rgb/1000))
         last_beat=Math.round(rgb/1000)
-        console.log(Math.round(rgb/1000)-last_beat)
+        
 }
 
 var last_beat=0;
