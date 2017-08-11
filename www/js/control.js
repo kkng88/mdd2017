@@ -55,10 +55,12 @@ function snap(){
             rgb+=data[i]+data[i+1]+data[i+2];
             
         }
-        updateChart(Math.round(rgb/1000))
-        //console.log(rgb)
+        updateChart(Math.round(rgb/1000)-last_beat)
+        last_beat=Math.round(rgb/1000)
+        console.log(Math.round(rgb/1000)-last_beat)
 }
 
+var last_beat=0;
 var myInt;
 function setSnapInt(){
     myInt=setInterval(function(){ snap() }, 90);
@@ -144,4 +146,59 @@ function updateChart(input){
           myChart.update();      
 }
 
+//Function to listen
+//https://codepen.io/travisholliday/pen/gyaJk
+function listen(){
+      navigator.getUserMedia = navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia;
+    if (navigator.getUserMedia) {
+      navigator.getUserMedia({
+      audio: true
+    },
+    function(stream) {
+      audioContext = new AudioContext();
+      analyser = audioContext.createAnalyser();
+      microphone = audioContext.createMediaStreamSource(stream);
+      javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+      analyser.smoothingTimeConstant = 0.8;
+      analyser.fftSize = 1024;
+
+      microphone.connect(analyser);
+      analyser.connect(javascriptNode);
+      javascriptNode.connect(audioContext.destination);
+
+      canvasContext = $("#listen-canvas")[0].getContext("2d");
+
+      javascriptNode.onaudioprocess = function() {
+          var array = new Uint8Array(analyser.frequencyBinCount);
+          analyser.getByteFrequencyData(array);
+          var values = 0;
+
+          var length = array.length;
+          for (var i = 0; i < length; i++) {
+            values += (array[i]);
+          }
+
+          var average = values / length;
+
+//          console.log(Math.round(average - 40));
+
+          canvasContext.clearRect(0, 0, 150, 300);
+          canvasContext.fillStyle = '#BadA55';
+          canvasContext.fillRect(0, 300 - average, 150, 300);
+          canvasContext.fillStyle = '#262626';
+          canvasContext.font = "48px impact";
+          canvasContext.fillText(Math.round(average - 40), -2, 300);
+
+        } // end fn stream
+    },
+    function(err) {
+      console.log("The following error occured: " + err.name)
+    });
+} else {
+  console.log("getUserMedia not supported");
+}
+}
 
