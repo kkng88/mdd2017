@@ -1,18 +1,41 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <link rel="stylesheet" href="components/loader.css">
-    <script src="components/loader.js"></script>
-    <script>
-        //
-        // TODO: Write JavaScript code here
-        //
-    </script>
-</head>
-<body>
-    <!-- TODO: Please edit here -->
-</body>
-</html>
+
+<ons-page modifier="full_bg">
+ 
+
+<!--<div class="logo-container">
+    <img class="logo-style" src="img/logo-white.png" alt=""/>
+</div>-->
+    
+<div class="login-form" style="padding:5% 10%">
+        <p class="text-lato welcome-slogan">
+            <span class="app-title text-bebas">Taken</span>
+             <br><span id="target" style="max-width:80%"></span><span id="cursor"></span>
+
+        </p> 
+</div>
+
+
+
+      <div id="hider" class="counter">
+        <a href="#" style="text-decoration:none;color:white;" onclick="stopcounter()"><div>Total Humans Trafficked</div></a>
+       <div id="flip-counter" class="flip-counter"></div>         
+     </div>
+     
+     <div id="shower" class="counter" style="display:none;">
+        <a href="#" class="login_link" style="text-decoration:none;color:white;" onclick="stopcounter()"><div>Total Humans Trafficked</div></a>
+        <div id="flip-counter2" class="flip-counter"></div>         
+     </div>
+     
+     <img src="img/bg.png" alt="" style="width:100%"/><!--<a href='tel:+1-800-555-1234'></a>-->
+
+
+<div class="login-bottom-part">
+    <ons-button id="fb-login" class="login-btn text-lato" disable-auto-styling="true">
+            <i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i>
+            <span class="iphone-login-text" style="text-align:center" >Continue with Facebook</span>
+        </ons-button>
+        <!--<ons-button modifier="quiet" disable-auto-styling="true" class="skip-for-now text-lato">Skip for now</ons-button>-->
+</div>
+ 
+
+</ons-page>

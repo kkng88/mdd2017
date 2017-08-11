@@ -1,4 +1,7 @@
-/**/
+.page--full_bg__background{
+    background-color:black;
+}
+
 
 #video{
     height:86%;
@@ -26,4 +29,17 @@
   top: 150px;
   left: 45%;
   text-align: center;
+}
+
+
+
+.login-button {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.forgot-password {
+  display: block;
+  margin: 8px auto 0 auto;
+  font-size: 14px;
 }
