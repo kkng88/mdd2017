@@ -25,6 +25,9 @@ navigator.mediaDevices.enumerateDevices()
         video.src = window.URL.createObjectURL(stream);
         video.play();
         
+        //Do actions
+        doChart()
+        setSnapInt()
     });
 
 }
@@ -52,12 +55,13 @@ function snap(){
             rgb+=data[i]+data[i+1]+data[i+2];
             
         }
-        console.log(rgb)
+        updateChart(Math.round(rgb/1000))
+        //console.log(rgb)
 }
 
 var myInt;
 function setSnapInt(){
-    myInt=setInterval(function(){ snap() }, 1000);
+    myInt=setInterval(function(){ snap() }, 100);
 }
 
 function stopInt(){
@@ -65,30 +69,41 @@ clearInterval(myInt);
 }
 
 //Do heart chart
-var myLiveChart;
+
 var myvar=1;  
 var label_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var data_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var myChart,chartctx
 
 function doChart(){
- var chartctx = document.getElementById("updating-chart").getContext("2d");   
+ chartctx = document.getElementById("updating-chart").getContext("2d");   
  
  
- var myChart = new Chart(chartctx, {
+ myChart = new Chart(chartctx, {
     type: 'line',
     data: {
         datasets: [{
+            pointRadius:0,
             data: data_arr
         }]
     },
     options: {
-        animation: {
-            duration: 0, // general animation time
+        legend: {display: false},
+        animation: {duration: 0},
+        scales: {
+            yAxes: [{
+                ticks: {beginAtZero:true},
+                gridLines : {display : false},
+                display:false
+            }],
+            xAxes: [{
+                gridLines : {display : false}
+            }]
         }
     }
 });
 
-    myinterval=setInterval(function(){
+  /*  myinterval=setInterval(function(){
         
         for (i = 0; i < data_arr.length; i++) { 
 
@@ -103,10 +118,25 @@ function doChart(){
           }
         }
           
-        
-
           myChart.update();       
 
-    }, 100);
+    }, 100);*/
   
+}
+
+function updateChart(input){
+        for (i = 0; i < data_arr.length; i++) { 
+
+          try{
+          myChart.data.datasets[0].data[i] = data_arr[i+1];
+          myChart.data.labels[i] = "";
+          if(i==39){
+              myChart.data.datasets[0].data[i] = input;
+          }
+          }catch(err){
+              myChart.data.datasets[0].data[i] = input;
+          }
+        }
+          
+          myChart.update();      
 }
