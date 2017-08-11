@@ -55,7 +55,58 @@ function snap(){
         console.log(rgb)
 }
 
+var myInt;
 function setSnapInt(){
-    setInterval(function(){ snap() }, 1000);
+    myInt=setInterval(function(){ snap() }, 1000);
 }
 
+function stopInt(){
+clearInterval(myInt);
+}
+
+//Do heart chart
+var myLiveChart;
+var myvar=1;  
+var label_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var data_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+function doChart(){
+ var chartctx = document.getElementById("updating-chart").getContext("2d");   
+ 
+ 
+ var myChart = new Chart(chartctx, {
+    type: 'line',
+    data: {
+        datasets: [{
+            data: data_arr
+        }]
+    },
+    options: {
+        animation: {
+            duration: 0, // general animation time
+        }
+    }
+});
+
+    myinterval=setInterval(function(){
+        
+        for (i = 0; i < data_arr.length; i++) { 
+
+          try{
+          myChart.data.datasets[0].data[i] = data_arr[i+1];
+          myChart.data.labels[i] = "";
+          if(i==39){
+              myChart.data.datasets[0].data[i] = Math.random();
+          }
+          }catch(err){
+              myChart.data.datasets[0].data[i] = Math.random();
+          }
+        }
+          
+        
+
+          myChart.update();       
+
+    }, 100);
+  
+}
