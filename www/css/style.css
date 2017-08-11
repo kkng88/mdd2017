@@ -1,2 +1,15 @@
 /**/
 
+#video{
+    height:86%;
+    width:100%;
+}   
+
+.page__content{
+    overflow-x:hidden;
+}
+
+#canvas{
+    height:30%;
+    width: 100%;
+}
