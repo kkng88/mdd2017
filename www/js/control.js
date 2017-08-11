@@ -61,7 +61,7 @@ function snap(){
 
 var myInt;
 function setSnapInt(){
-    myInt=setInterval(function(){ snap() }, 100);
+    myInt=setInterval(function(){ snap() }, 90);
 }
 
 function stopInt(){
@@ -76,6 +76,7 @@ var data_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 var myChart,chartctx
 
 function doChart(){
+ $("#updating-chart").height("400")
  chartctx = document.getElementById("updating-chart").getContext("2d");   
  
  
@@ -84,7 +85,9 @@ function doChart(){
     data: {
         datasets: [{
             pointRadius:0,
-            data: data_arr
+            data: data_arr,
+            fill:false,
+            borderColor: "white"
         }]
     },
     options: {
@@ -92,18 +95,18 @@ function doChart(){
         animation: {duration: 0},
         scales: {
             yAxes: [{
-                ticks: {beginAtZero:true},
                 gridLines : {display : false},
                 display:false
             }],
             xAxes: [{
-                gridLines : {display : false}
+                gridLines : {display : false},
+                display:false
             }]
         }
     }
 });
-
-  /*  myinterval=setInterval(function(){
+/*
+    myinterval=setInterval(function(){
         
         for (i = 0; i < data_arr.length; i++) { 
 
@@ -140,3 +143,5 @@ function updateChart(input){
           
           myChart.update();      
 }
+
+

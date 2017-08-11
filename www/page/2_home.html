@@ -17,10 +17,13 @@
 <button id="snap" onclick="setSnapInt()">Start</button>
 <button id="stop" onclick="stopInt()">Stop</button>
 <button id="chart" onclick="doChart()">Chart</button>
+<button id="listen" onclick="listen()">Listen</button>
 <canvas id="canvas"canvas></canvas>
 
-<div style="width:100%;height:50%;padding:10px;overflow-x: hidden" id="chart-cont">
-      <canvas id="updating-chart" width="100%" height="100%"></canvas>
+
+
+<div style="position:absolute;top:0px;width:100%;height:80%;padding:10px;overflow-x: hidden" id="chart-cont">
+      <canvas id="updating-chart" width="300px"></canvas>
 </div>
 
 
