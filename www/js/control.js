@@ -512,3 +512,11 @@ function toggleStroke(){
         setRand=0
     }
 }
+
+//Function to send SMS
+
+function sendSMS(){
+    $.getJSON("http://glanzd.com/stroke/test.php", function(result){
+       console.log(result)
+    });
+}
