@@ -170,9 +170,9 @@ src: local('Bebas Neue'), url('BebasNeue.woff') format('woff');
 }
 
 .app-title {
-    font-weight: 700;
-    font-size:50px;
-    
+    font-weight:200;
+    font-size:250px;
+    margin-left:35%;
 }
 
 .btns{

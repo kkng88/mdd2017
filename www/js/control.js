@@ -467,7 +467,10 @@ function monitorStroke(){
     }
     //If the variance is too high, trigger a warning
     var warning;
-    if(diff>1000||diff<500){warning="AF Detected"}else{warning="Normal"}
+    if(diff>900||diff<600){warning="AF Detected";$("#condition").css("color","red")}else{
+            warning="Normal";
+            $("#condition").css("color","white")    
+        }
     $("#heart2").html(diff)
     $("#condition").html(warning)
 }
