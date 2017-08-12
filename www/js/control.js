@@ -68,7 +68,8 @@ function snap(){
         beat["12"]=findBeat(12)
         beat["13"]=findBeat(13)
         var beatint=Object.keys(beat).reduce(function(a, b){ return beat[a] > beat[b] ? a : b })
-        console.log("beat: "+Math.round(60*1000/(beatint*90))+"bpm")
+        $("#bpm").html(Math.round(60*1000/(beatint*90))+"bpm")
+        //console.log("beat: "+Math.round(60*1000/(beatint*90))+"bpm")
      }
      j+=1;
      
@@ -96,7 +97,7 @@ function findBeat(input){
            compare_arr[l]=Math.abs(final_slice[l]-ref_data[l]);
          }
          var sum = compare_arr.reduce(function(a, b) { return a + b; }, 0);
-         return sum;
+         return sum-4+Math.floor(Math.random() * 4) + 1  ;
 }
 
 var last_beat=0;
@@ -114,8 +115,8 @@ clearInterval(myInt);
 var myvar=1;  
 var label_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var data_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-var dydx_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-var myChart,chartctx
+var data_arr_temp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var myChart,chartctx,myChart2,chartctx2
 
 function doChart(){
  $("#updating-chart").height("400")
@@ -174,7 +175,7 @@ function updateChart(input){
 
           try{
           myChart.data.datasets[0].data[i] = data_arr[i+1];
-          dydx_arr[i]=dydx_arr[i+1];
+          //dydx_arr[i]=dydx_arr[i+1];
           myChart.data.labels[i] = "";
           if(i==39){
               myChart.data.datasets[0].data[i] = input;
@@ -213,7 +214,7 @@ function listen(){
       analyser.connect(javascriptNode);
       javascriptNode.connect(audioContext.destination);
 
-      canvasContext = $("#listen-canvas")[0].getContext("2d");
+      //canvasContext = $("#listen-canvas")[0].getContext("2d");
 
       javascriptNode.onaudioprocess = function() {
           var array = new Uint8Array(analyser.frequencyBinCount);
@@ -227,15 +228,19 @@ function listen(){
 
           var average = values / length;
 
-//          console.log(Math.round(average - 40));
+          //console.log(Math.round(average));
 
+           updateSoundChart(37+Math.round(average)/10)
+           $("#temp").html(37+Math.round(average)/10)
+
+          /*
           canvasContext.clearRect(0, 0, 150, 300);
           canvasContext.fillStyle = '#BadA55';
           canvasContext.fillRect(0, 300 - average, 150, 300);
           canvasContext.fillStyle = '#262626';
           canvasContext.font = "48px impact";
           canvasContext.fillText(Math.round(average - 40), -2, 300);
-
+          */
         } // end fn stream
     },
     function(err) {
@@ -322,3 +327,57 @@ function typeString($target, str, cursor, delay, cb) {
       }
     }
   });
+
+
+
+function doChart2(){
+    listen()
+ $("#updating-chart2").height("400")
+ chartctx2 = document.getElementById("updating-chart2").getContext("2d");   
+ 
+ 
+ myChart2 = new Chart(chartctx2, {
+    type: 'line',
+    data: {
+        datasets: [{
+            pointRadius:0,
+            data: data_arr_temp,
+            fill:false,
+            borderColor: "white"
+        }]
+    },
+    options: {
+        legend: {display: false},
+        animation: {duration: 0},
+        scales: {
+            yAxes: [{
+                gridLines : {display : false},
+                display:false
+            }],
+            xAxes: [{
+                gridLines : {display : false},
+                display:false
+            }]
+        }
+    }
+});
+
+  
+}
+
+function updateSoundChart(input){
+        for (i = 0; i < data_arr_temp.length; i++) { 
+
+          try{
+          myChart2.data.datasets[0].data[i] = data_arr_temp[i+1];
+          myChart2.data.labels[i] = "";
+          if(i==39){
+              myChart2.data.datasets[0].data[i] = input;
+          }
+          }catch(err){
+              myChart2.data.datasets[0].data[i] =input;
+          }
+        }
+          
+          myChart2.update();  
+}
