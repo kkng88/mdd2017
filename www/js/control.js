@@ -417,7 +417,7 @@ var options3 = {
             pointRadius:0,
             data: data_beat,
             fill:false,
-            borderColor: "white"
+            borderColor: "rgba(255,255,255,0.8)"
     	},	
 			{
                 pointRadius:0,
@@ -425,13 +425,13 @@ var options3 = {
                 backgroundColor:"rgba(255,255,255,0.1)",
 				borderWidth: 1
 			}
-            ,    
+           /* ,    
 			{
                 pointRadius:0,
 				data: stroke3,
                 backgroundColor:"rgba(255,255,255,0.1)",
 				borderWidth: 1
-			}
+			}*/
             		]
   },
   options: {
@@ -463,18 +463,25 @@ function monitorStroke(){
     //Change to the reference
      var diff=0;
     for(var i = 0; i < stroke.length; i += 1) {
-        diff+=Math.abs(Math.round(stroke[i]-data_arr_temp[i]))
+        diff+=Math.abs(Math.round(stroke[i]-data_beat[i]))
     }
+    //If the variance is too high, trigger a warning
+    var warning;
+    if(diff>1000||diff<500){warning="AF Detected"}else{warning="Normal"}
     $("#heart2").html(diff)
+    $("#condition").html(warning)
 }
 
 
 function updateBeat(input){
         for (i = 0; i < data_beat.length; i++) {
+          
           var rand=0;
+          //Introduce a stroke here
           if(setRand==1){
-              rand=Math.floor(Math.random() * 40)-20;
-              if(rand<0){rand=0}
+              rand=Math.floor(Math.random() * 30)-20;
+              if(rand<0){rand=input}
+              
           }
           try{
           data_beat[i] = data_beat[i+1];
@@ -489,9 +496,15 @@ function updateBeat(input){
 
 var setRand=0;
 
+//Function to trigger a stroke 30 days before
 function toggleStroke(){
     if(setRand==0){
         setRand=1
+        setTimeout(function(){setRand=0},500)
+        setTimeout(function(){setRand=1},600)
+        setTimeout(function(){setRand=0},1100)
+        setTimeout(function(){setRand=1},1200)
+        setTimeout(function(){setRand=0},1500)
     }else{
         setRand=0
     }
