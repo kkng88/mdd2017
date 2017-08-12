@@ -44,3 +44,131 @@
   margin: 8px auto 0 auto;
   font-size: 14px;
 }
+
+/*font*/
+.text-lato {
+    font-family:'Lato',sans-serif;
+}
+
+.text-notlarge {
+    font-size: 1.3em;
+}
+
+.text-small {
+    font-size:12px;
+}
+
+.text-large {
+    font-size: 1.5em;
+}
+
+.text-xlarge {
+    font-size: 1.75em;
+}
+
+.text-xxlarge {
+    font-size: 1.95em;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.text-light {
+    font-weight: 300;
+}
+
+.text-bebas {
+    font-family: "Bebas Neue";
+}
+
+@font-face {
+font-family: 'Bebas Neue';
+font-style: normal;
+font-weight: normal;
+src: local('Bebas Neue'), url('BebasNeue.woff') format('woff');
+}
+
+.text-transparency {
+    opacity: 0.8;
+}
+
+.theme-color {
+    color: #FF6368;
+}
+
+.text-content-color {
+    color: rgba(0,0,0,0.8);
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.enabled {
+    opacity: 1;
+}
+
+.disable-for-version-1 {
+    opacity: 0;
+}
+
+/*login screen*/
+.login-bottom-part {
+    text-align: center;
+    width: 100%;
+    margin: 20px auto 30px;
+    bottom: 0;
+    position:absolute;
+}
+
+.login-btn { 
+    font-size:14px;
+    font-weight: 700;
+    color:#ffffff;
+    background:transparent;
+    border:2px solid #ffffff;
+    padding:8px 12px;
+    margin: 30% auto 0;
+    width: 76%;
+    text-align: left;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.fa-facebook-square {
+    text-align:left;
+    vertical-align: middle;
+    margin-right:25px;
+    font-size:36px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.welcome-slogan {
+    font-weight: 300;
+    color:#ffffff;
+    font-size:32px;
+    text-align: left;
+    margin-top: 15%;
+    height: 90px;
+}
+
+.logo-style {
+    height: 40%;
+    width: 40%;    
+}
+
+.logo-container {
+    width: 76%;
+    margin: 10% auto 0;
+}
+
+.app-title {
+    font-weight: 700;
+    font-size:50px;
+    
+}

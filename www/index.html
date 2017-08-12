@@ -6,7 +6,8 @@
   <meta http-equiv="Content-Security-Policy" content="default-src * gap:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *; img-src * data: blob: android-webview-video-poster:; style-src * 'unsafe-inline'; media-src * blob: file://*">
  
  <script src="components/loader.js"></script>
-  <script src="lib/onsenui/js/onsenui.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+ <script src="lib/onsenui/js/onsenui.min.js"></script>
   <script src="js/control.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
   <link rel="stylesheet" href="components/loader.css">
@@ -17,7 +18,9 @@
   <script>
     ons.ready(function() {
       console.log("Onsen UI is ready!");
-    });
+
+    })
+
 
     window.fn = {};
     window.fn.open = function() {
@@ -31,6 +34,29 @@
         .load(page)
         .then(menu.close.bind(menu));
     };
+    
+     document.addEventListener('init', function(event) {
+         
+          $("#target").teletype({
+          text: [
+                '15 million people suffer stroke each year',
+                '5 million die, 5 million permanently disabled.',
+                'Stroke can happen to anyone at any time.',
+                '80% of strokes are preventable.',
+                'Golden hour is 60 minutes of stroke onset.',
+                '2 million nerve cells die each minute delayed.',
+                'Treatment within 1 hour saves 22% of lives.'
+          ]
+        });
+    
+    $("#cursor").teletype({
+          text: ['_', ' '],
+          delay: 0,
+          pause: 300
+        });
+             
+         
+     })
 
   </script>
 </head>
