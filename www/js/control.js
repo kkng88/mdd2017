@@ -516,7 +516,10 @@ function toggleStroke(){
 //Function to send SMS
 
 function sendSMS(){
-    $.getJSON("http://glanzd.com/stroke/test.php", function(result){
+    console.log("Test")
+    /*
+    $.getJSON("https://stroke-kkng88.c9users.io/sms.php", function(result){
        console.log(result)
     });
+    */
 }

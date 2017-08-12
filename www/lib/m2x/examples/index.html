@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="styles.css" type="text/css" rel="stylesheet">
+    <script src="../dist/current.js"></script>
+
+    <!-- Keep in mind that the M2X Client does *not* require jQuery to work,
+         but for the purpose of keeping things simple we're using it in this example -->
+    <script src="jquery-1.10.2.min.js"></script>
+    <script src="example.js"></script>
+  </head>
+
+  <body>
+    <label>API Key:</label>
+    <input type="text" name="api-key" value="8bc1653b8a6104cc861352e753344b79">
+
+    <label>Device ID:</label>
+    <input type="text" name="device-id" value="2f9fa6b05c3c8fd7a390846284208763">
+
+    <fieldset id="device-view">
+      <legend>Get device information</legend>
+      <pre><code></code></pre>
+      <button>Get</button>
+    </fieldset>
+
+    <fieldset id="update-metadata-field">
+      <legend>Update device metadata field</legend>
+
+      <label>Field name:</label>
+      <input type="text" name="field-name">
+      <em>Field names must begin with a lowercase letter, may contain only lowercase letters, numbers, and underscores, and may be up to 250 characters long.</em>
+
+
+      <label>Field value:</label>
+      <input type="text" name="field-value">
+      <em>Field values may be any string up to 5,000 characters.</em>
+
+      <br />
+      <button>Update Metadata</button>
+    </fieldset>
+
+    <fieldset id="stream-push">
+      <legend>Push value to a stream</legend>
+
+      <label>Stream name:</label>
+      <input type="text" name="stream-name" value="hrate">
+
+      <label>Value:</label>
+      <input type="text" name="stream-value" id="sendtom2x">
+
+      <button>Push value</button>
+    </fieldset>
+
+    <fieldset id="stream-view">
+      <legend>Fetch stream values</legend>
+
+      <label>Stream name:</label>
+      <input type="text" name="stream-name">
+
+      <pre><code></code></pre>
+      <button>Fetch values</button>
+    </fieldset>
+
+    <fieldset id="send-command">
+      <legend>Send command to device</legend>
+
+      <label>Command name:</label>
+      <input type="text" name="command-name">
+
+      <button>Send Command</button>
+    </fieldset>
+
+    <fieldset id="commands-view">
+      <legend>List device's commands</legend>
+      <pre><code></code></pre>
+      <button>Get</button>
+    </fieldset>
+
+    <fieldset id="location-history">
+      <legend>Read Location History</legend>
+      <pre><code></code></pre>
+      <button>Read</button>
+    </fieldset>
+
+    <fieldset id="delete-location-history">
+      <legend>Delete Location History</legend>
+
+      <label>From:</label>
+      <input type="datetime" name="fromTime">
+      <em> Timestamp must be in ISO8601 format Ex: 2014-09-09T19:15:00.624Z </em>
+
+
+      <label>End:</label>
+      <input type="datetime" name="endTime">
+      <em> Timestamp must be in ISO8601 format Ex: 2014-09-09T19:15:00.624Z </em>
+
+      <br />
+      <button>Delete Location History</button>
+    </fieldset>
+
+    <fieldset id="add-device-to-collection">
+      <legend>Add Device to Collection</legend>
+
+      <label>Collection Id:</label>
+      <input type="text" name="collection-id">
+
+      </br>
+      <button>Add to Collection</button>
+    </fieldset>
+
+
+    <fieldset id="remove-device-from-collection">
+      <legend>Remove Device From Collection</legend>
+
+      <label>Collection Id:</label>
+      <input type="text" name="collection-id-rm">
+
+      </br>
+      <button>Remove from Collection</button>
+    </fieldset>
+
+
+    <fieldset id="search-device">
+      <legend>Search Device</legend>
+
+      <label>Visibility:</label>
+      <input type="text" name="device-visibility">
+
+      <label>Limit:</label>
+      <input type="text" name="limit">
+
+      <label>Status:</label>
+      <input type="text" name="status">
+
+      <pre><code></code></pre>
+      <button>Search Device</button>
+    </fieldset>
+
+
+    <fieldset id="iterate-over-devices">
+      <legend>Iterate Over Devices</legend>
+
+      <label>Limit:</label>
+      <input type="text" name="limit">
+      <em> Limit describes the number of devices per page </em>
+
+      <pre><out></out></pre>
+      <button>Iterate Over Devices</button>
+    </fieldset>
+
+
+    <fieldset id="export-values">
+      <legend>Export Values</legend>
+
+      <label>Limit:</label>
+      <input type="text" name="limit">
+      <em> Limit describes the number of streams per device </em>
+
+      <label>Streams:</label>
+      <input type="text" name="streams">
+      <em> Enter stream names seperated by comma list </em>
+
+      </br>
+      <pre><out></out></pre>
+      <button>Export Values</button>
+    </fieldset>
+
+    <p id="status-bar">Status: <span></span></p>
+  </body>
+</html>
