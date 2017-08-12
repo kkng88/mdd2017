@@ -60,7 +60,7 @@ function snap(){
         last_beat=Math.round(rgb/1000)
         
     //Do every 40 times    
-     if(j%40==0){
+     if(j%2==0){
         var beat={}
         beat["9"]=findBeat(9)
         beat["10"]=findBeat(10)
@@ -70,11 +70,11 @@ function snap(){
         var beatint=Object.keys(beat).reduce(function(a, b){ return beat[a] > beat[b] ? a : b })
         $("#bpm").html(Math.round(60*1000/(beatint*90))+"bpm")
         //console.log("beat: "+Math.round(60*1000/(beatint*90))+"bpm")
+        //Add this to a beat arr
+             updateBeat(Math.round(60*1000/(beatint*90)))
+             monitorStroke()
      }
-     j+=1;
-     
-     
-     
+     j+=1; 
 }
 
 function findBeat(input){
@@ -116,6 +116,8 @@ var myvar=1;
 var label_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var data_arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var data_arr_temp=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var data_beat=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
 var myChart,chartctx,myChart2,chartctx2
 
 function doChart(){
@@ -232,6 +234,7 @@ function listen(){
            updateSoundChart(output)
            $("#temp").html(output)
             $("#temp2").html(output)
+         
           /*
           canvasContext.clearRect(0, 0, 150, 300);
           canvasContext.fillStyle = '#BadA55';
@@ -382,7 +385,11 @@ function updateSoundChart(input){
           }
         }
           
-          myChart2.update();  
+          myChart2.update();
+          //Kokd
+             //myChart3.update();
+             //monitorStroke()
+
 }
 
 var vidstate=0
@@ -396,38 +403,96 @@ function toggleVid(){
     }
 }
 
+var stroke=[75,0,76,82,0,0,76,76,80,79,0,0,0,49,50,58,49,50,55,58,59,58,53,53,67,66,65,64,67,59,58,57,62,63,62,61,60,59,60];
+var stroke2=[74,74,0,0,75,0,82,82,0,0,0,0,75,75,80,0,80,0,0,0,0,49,50,58,49,51,59,51,56,59,54,54,67,66,65,67,58,56,62,63]
+var stroke3=[73,0,74,0,81,0,0,0,74,74,80,0,0,0,48,59,58,55,57,59,57,52,52,67,65,64,63,67,67,58,56,56,61,63,63,63,62,61,60,59]
+
+
 var options3 = {
   type: 'line',
   data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: label_arr,
     datasets: [
         {
-	      label: '# of Votes',
-	      data: [12, 19, 3, 5, 2, 3],
-      	borderWidth: 1
+            pointRadius:0,
+            data: data_beat,
+            fill:false,
+            borderColor: "white"
     	},	
 			{
-				label: '# of Points',
-				data: [7, 11, 5, 8, 3, 7],
+                pointRadius:0,
+				data: stroke2,
+                backgroundColor:"rgba(255,255,255,0.1)",
 				borderWidth: 1
 			}
-		]
+            ,    
+			{
+                pointRadius:0,
+				data: stroke3,
+                backgroundColor:"rgba(255,255,255,0.1)",
+				borderWidth: 1
+			}
+            		]
   },
   options: {
               legend: {display: false},
         animation: {duration: 0},
   	scales: {
     	yAxes: [{
-        ticks: {
-					reverse: false
-        }
-      }]
+                gridLines : {display : false},
+                display:false/*,
+                ticks : {
+                    max : 43,    
+                    min : 36
+                }*/
+                }]
+    ,
+            xAxes: [{
+                gridLines : {display : false},
+                display:false}]
     }
   }
 }
-
+var myChart3;
 function addThirdChart(){
     var ctx3 = document.getElementById('updating-chart3').getContext('2d');
-new Chart(ctx3, options3);
+    myChart3 =  new Chart(ctx3, options3);
+}
 
+function monitorStroke(){
+    //Change to the reference
+     var diff=0;
+    for(var i = 0; i < stroke.length; i += 1) {
+        diff+=Math.abs(Math.round(stroke[i]-data_arr_temp[i]))
+    }
+    $("#heart2").html(diff)
+}
+
+
+function updateBeat(input){
+        for (i = 0; i < data_beat.length; i++) {
+          var rand=0;
+          if(setRand==1){
+              rand=Math.floor(Math.random() * 40)-20;
+              if(rand<0){rand=0}
+          }
+          try{
+          data_beat[i] = data_beat[i+1];
+          if(i==39){
+             data_beat[i]= input-rand;
+          }
+          }catch(err){
+              }
+        }
+          myChart3.update();      
+}
+
+var setRand=0;
+
+function toggleStroke(){
+    if(setRand==0){
+        setRand=1
+    }else{
+        setRand=0
+    }
 }

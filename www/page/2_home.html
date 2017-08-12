@@ -27,9 +27,11 @@
 
 <div style="width:100%;height:10%;position:fixed;bottom:0;z-index:9999">
     
-<button class="btns" id="play" onclick="/*getvideo();doChart2()*/addThirdChart()"><ons-icon icon="fa-circle" fixed-width="false"></ons-icon></button>
+<button class="btns" id="play" onclick="getvideo();doChart2();addThirdChart()"><ons-icon icon="fa-circle" fixed-width="false"></ons-icon></button>
 <button class="btns" id="stop" onclick="stopInt()"><ons-icon icon="fa-stop" fixed-width="false"></ons-icon></button>
 <button class="btns" id="togglevid" onclick="toggleVid()"><ons-icon icon="fa-exchange" fixed-width="false"></ons-icon></button>
+<button class="btns" id="togglevid" onclick="toggleStroke()"><ons-icon icon="fa-bolt" fixed-width="false"></ons-icon></button>
+
 
 <!--<button class="" id="chart" onclick="doChart()">Chart</button>
 <button class="btns" id="listen"  style="font-size:20px;" onclick="listen()"><ons-icon style="margin-top:-5px;" icon="ion-thermometer" fixed-width="false"></ons-icon></button>
@@ -51,7 +53,7 @@
       <canvas id="updating-chart2" width="360px"></canvas>
 </div>
 
-<div class="chart-container" style="top:100%" id="chart-cont3">
+<div class="chart-container" style="top:100%;height:50%" id="chart-cont3">
             <span style="font-size:20px;margin-left:20px">Heart Rates: <span id="heart2"></span></span>
       <canvas id="updating-chart3" width="360px"></canvas>
 </div>
