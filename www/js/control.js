@@ -72,6 +72,7 @@ function snap(){
         //console.log("beat: "+Math.round(60*1000/(beatint*90))+"bpm")
         //Add this to a beat arr
              updateBeat(Math.round(60*1000/(beatint*90)))
+             $("#sendtom2x").val(Math.round(60*1000/(beatint*90)))
              monitorStroke()
      }
      j+=1; 
@@ -516,10 +517,11 @@ function toggleStroke(){
 //Function to send SMS
 
 function sendSMS(){
-    console.log("Test")
-    /*
     $.getJSON("https://stroke-kkng88.c9users.io/sms.php", function(result){
        console.log(result)
     });
-    */
+}
+
+function triggerClick(){
+    $( "#stream-push" ).trigger( "click" );
 }

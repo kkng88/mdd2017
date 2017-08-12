@@ -1,5 +1,5 @@
 /*globals jQuery,localStorage,alert,M2X*/
-(function($) {
+
     function M2XExample() {
         this.$statusBar = $("#status-bar span");
         this.$apiKey = $("input[name=api-key]");
@@ -21,8 +21,8 @@
         this.bindEvents();
 
         // Load api/device values from localStorage (if any)
-        this.$apiKey.val( localStorage.getItem("api-key") || "" );
-        this.$deviceID.val( localStorage.getItem("device-id") || "" );
+        this.$apiKey.val("8bc1653b8a6104cc861352e753344b79");
+        this.$deviceID.val("2f9fa6b05c3c8fd7a390846284208763");
         this.onKeyChange();
         this.ondeviceChange();
     }
@@ -209,6 +209,7 @@
                 );
             }
         }, this));
+            
 
         // Handler for fetching values from a data stream
         this.$streamView.on("click", "button", $.proxy(function() {
@@ -380,7 +381,4 @@
         }
     };
 
-    $(function() {
-        new M2XExample();
-    });
-}(jQuery));
+

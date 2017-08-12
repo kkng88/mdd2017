@@ -10,6 +10,8 @@
  <script src="lib/onsenui/js/onsenui.min.js"></script>
   <script src="js/control.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+  <script src="lib/m2x/dist/current.js"></script>
+  <script src="lib/m2x/examples/example.js"></script>
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
@@ -55,8 +57,8 @@
           pause: 300
         });
              
-         
-     })
+             new M2XExample();
+     }) 
 
   </script>
 </head>
@@ -78,7 +80,7 @@
       </ons-page>
     </ons-splitter-side>
     <ons-splitter-content id="content" page="page/1_login.html"></ons-splitter-content>
-  </ons-splitter>
+</ons-splitter>
 
 
   <ons-template id="settings.html">
