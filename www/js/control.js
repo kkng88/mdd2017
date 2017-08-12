@@ -227,12 +227,11 @@ function listen(){
           }
 
           var average = values / length;
-
+          var output=37+Math.round(average)/10
           //console.log(Math.round(average));
-
-           updateSoundChart(37+Math.round(average)/10)
-           $("#temp").html(37+Math.round(average)/10)
-
+           updateSoundChart(output)
+           $("#temp").html(output)
+            $("#temp2").html(output)
           /*
           canvasContext.clearRect(0, 0, 150, 300);
           canvasContext.fillStyle = '#BadA55';
@@ -352,7 +351,11 @@ function doChart2(){
         scales: {
             yAxes: [{
                 gridLines : {display : false},
-                display:false
+                display:false,
+                ticks : {
+                    max : 43,    
+                    min : 36
+                }
             }],
             xAxes: [{
                 gridLines : {display : false},
@@ -380,4 +383,51 @@ function updateSoundChart(input){
         }
           
           myChart2.update();  
+}
+
+var vidstate=0
+function toggleVid(){
+    if(vidstate==0){
+        $("#video").css("left","0")
+        vidstate=1;
+    }else{
+        $("#video").css("left","-100%")
+        vidstate=0
+    }
+}
+
+var options3 = {
+  type: 'line',
+  data: {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+        {
+	      label: '# of Votes',
+	      data: [12, 19, 3, 5, 2, 3],
+      	borderWidth: 1
+    	},	
+			{
+				label: '# of Points',
+				data: [7, 11, 5, 8, 3, 7],
+				borderWidth: 1
+			}
+		]
+  },
+  options: {
+              legend: {display: false},
+        animation: {duration: 0},
+  	scales: {
+    	yAxes: [{
+        ticks: {
+					reverse: false
+        }
+      }]
+    }
+  }
+}
+
+function addThirdChart(){
+    var ctx3 = document.getElementById('updating-chart3').getContext('2d');
+new Chart(ctx3, options3);
+
 }
